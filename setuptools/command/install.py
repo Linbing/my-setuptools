@@ -19,9 +19,11 @@ class install(orig.install):
         ('old-and-unmanageable', None, "Try not to use this!"),
         ('single-version-externally-managed', None,
          "used by system package builders to create 'flat' eggs"),
+        ('only-pyc', None, "install only *.pyc file"),
     ]
     boolean_options = orig.install.boolean_options + [
-        'old-and-unmanageable', 'single-version-externally-managed',
+        'old-and-unmanageable',
+        'single-version-externally-managed','only-pyc',
     ]
     new_commands = [
         ('install_egg_info', lambda self: True),
@@ -33,6 +35,7 @@ class install(orig.install):
         orig.install.initialize_options(self)
         self.old_and_unmanageable = None
         self.single_version_externally_managed = None
+        self.only_pyc = 0
 
     def finalize_options(self):
         orig.install.finalize_options(self)

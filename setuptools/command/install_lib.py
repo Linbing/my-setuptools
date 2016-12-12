@@ -5,6 +5,24 @@ import distutils.command.install_lib as orig
 
 class install_lib(orig.install_lib):
     """Don't add compiled flags to filenames of non-Python files"""
+   
+    user_options = orig.install_lib.user_options + [
+            ('only-pyc', None, "install only *.pyc files"),
+    ]
+
+    boolean_options = orig.install_lib.boolean_options + [
+        'only-pyc',
+    ]
+    
+    def initialize_options(self):
+        orig.install_lib.initialize_options(self)
+        self.only_pyc = None
+    
+    def finalize_options(self):
+        orig.install_lib.finalize_options(self)
+        self.set_undefined_options('install',
+                                    ('only_pyc', 'only_pyc'),
+                                    )
 
     def run(self):
         self.build()

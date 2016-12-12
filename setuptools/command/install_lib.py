@@ -30,6 +30,10 @@ class install_lib(orig.install_lib):
         if outfiles is not None:
             # always compile, in case we have any extension stubs to deal with
             self.byte_compile(outfiles)
+        #delete source py in install dir
+        if self.only_pyc:
+            for f_py in outfiles:
+                os.remove(f_py)
 
     def get_exclusions(self):
         """

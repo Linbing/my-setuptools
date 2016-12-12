@@ -1,5 +1,8 @@
 
 1. build
+
+python ../setup.py sdist --only-pyc
+
 rpmbuild -ba ./python-setuptools.spec
 
 2. note
